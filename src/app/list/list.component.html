@@ -1,0 +1,32 @@
+<div class="container" style="background-color:  blueviolet">
+<table class="table" style="color: black">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Age</th>
+      <th scope="col">City</th>
+      <th scope="col">Options</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let person of people; let ind = index;">
+      <ng-container *ngIf="person.edit; else elseBlock">
+          <th scope="row">{{ ind+1 }}</th>
+          <td scope="col"><input type="text" [(value)]="person.name" (change)="people[ind].name = $event.target.value"/></td>
+          <td scope="col"><input type="number" [(value)]="person.age" (change)="people[ind].age = $event.target.value"/></td>
+          <td scope="col"><input type="text" [(value)]="person.city" (change)="people[ind].city = $event.target.value"/></td>
+          <td scope="col"><button (click)="changeEdit(ind);" class="btn btn-primary">Save</button></td>
+      </ng-container>
+      <ng-template #elseBlock>
+          <th scope="row">{{ ind+1 }}</th>
+          <td scope="col">{{ person.name }}</td>
+          <td scope="col">{{ person.age }}</td>
+          <td scope="col">{{ person.city }}</td>
+          <td scope="col"><button type="button" (click)="changeEdit(ind);" class="btn btn-primary">Edit</button></td>
+          <td scope="col"><button type="button" (click)="Delete(ind);" class="btn btn-danger">Delete</button></td>
+      </ng-template>
+    </tr>
+  </tbody>
+</table>
+</div>
